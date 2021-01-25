@@ -1,8 +1,10 @@
 import React from "react";
 import {Redirect} from "react-router";
+import {removeUser} from "../../functions";
 
 const LogoutPage = () => {
-  sessionStorage.removeItem('user');
+
+  removeUser()
 
   return (
     <Redirect to="/"/>

@@ -3,7 +3,6 @@ import AvatarEditor from 'react-avatar-editor'
 
 const MyEditor = ({userImage}) => {
 
-  console.log(userImage)
   return (
     <AvatarEditor
       image={userImage}

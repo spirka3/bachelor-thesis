@@ -1,6 +1,6 @@
 import React from 'react'
 import BootstrapTable from "react-bootstrap-table-next";
-import {pages} from "../data";
+import {pages} from "../../data";
 
 const AdminPage = () => {
 

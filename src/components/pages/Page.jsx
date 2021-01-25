@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import {pages} from "./data" 
+import {pages} from "../../data"
 // import Model from "./models/Model.js"
 
 const Page = ({id}) => {
