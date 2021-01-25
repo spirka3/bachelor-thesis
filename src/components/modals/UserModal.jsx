@@ -1,17 +1,11 @@
 import React from "react";
-import {Button, Modal} from "react-bootstrap";
+import {Button, ButtonGroup, Modal} from "react-bootstrap";
 import {Image, Form} from 'react-bootstrap';
 
-const UserModal = ({showModal, setShowModal}) => {
+const UserModal = ({showModal, setShowModal, userImage}) => {
 
   const closeModal = () => setShowModal(false);
-
-  var style = {
-    marginTop: "2.4em",
-    position: "fix",
-    width: "20%",
-    left: "80%"
-  }
+  const user = sessionStorage.getItem('user');
 
   const handleClick = () => {
     console.log("clg")
@@ -19,7 +13,7 @@ const UserModal = ({showModal, setShowModal}) => {
 
   const Avatar = () => {
     return (
-      <Image src="../avatar1.png" rounded onClick={handleClick} style={{width:"60px", height:"60px", margin: "6px"}}/>
+      <Image src={userImage} rounded onClick={handleClick} style={{width:"60px", height:"60px", margin: "6px"}}/>
     )
   }
 
@@ -35,17 +29,56 @@ const UserModal = ({showModal, setShowModal}) => {
     )  
   }
 
+  const LoginUser = () => {
+    return (
+      <>
+        <Modal.Header closeButton>
+          <Avatar/>
+          <Modal.Title>Your Name</Modal.Title>
+          <Toggle/>
+        </Modal.Header>
+        <Modal.Body>
+          <Button href="/admin" className={"mb-2 btn-block"}>Administration</Button>
+          <ButtonGroup className={"btn-block"} size={"sm"}>
+            <Button href="/profile-settings" className={"mr-1"}>Profile settings</Button>
+            <Button href="/logout">Log out</Button>
+          </ButtonGroup>
+        </Modal.Body>
+      </>
+    )
+  }
+
+  const LogoutUser = () => {
+    return (
+      <>
+        <Modal.Header closeButton>
+          <Avatar/>
+          <Modal.Title>Your are not login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ButtonGroup>
+            <Button href="/login">Login</Button>
+            <Button href="/register">Register</Button>
+          </ButtonGroup>
+        </Modal.Body>
+      </>
+    )
+  };
+
+  const style = {
+    marginTop: "2.4em",
+    position: "fix",
+    width: "20%",
+    left: "80%"
+  }
+
   return (
     <Modal show={showModal} onHide={closeModal} animation={false} style={style}>
-      <Modal.Header closeButton>
-        <Avatar/>
-        <Modal.Title>Your Name</Modal.Title>
-        <Toggle/>
-      </Modal.Header>
-      <Modal.Body>
-        <Button href="/profile-settings">Profile settings</Button>
-        <Button href="/logout">Log out</Button>
-      </Modal.Body>
+      { user !== null ? (
+        <LoginUser/>
+      ) : (
+        <LogoutUser/>
+      )}
     </Modal>
   )
 }

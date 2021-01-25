@@ -4,9 +4,9 @@ import {Form, Button} from 'react-bootstrap';
 export const SearchBar = () => {
 
   return (
-    <Form inline>
-      <Form.Control type="text" placeholder="Search" className="mr-sm-2" size="sm"/>
-      <Button variant="outline-light" size="sm">Search</Button>
-    </Form>        
+    <Form inline className={"pr-1"}>
+      <Button variant="outline-light" size="sm" className="mr-1">Search</Button>
+      <Form.Control type="text" placeholder="Search" size="sm"/>
+    </Form>
   )
 }

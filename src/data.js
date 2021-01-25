@@ -1,3 +1,24 @@
+export const nav_routes = [{
+    name: "One",
+    link: "/one"
+  }, {
+    name: "Two",
+    link: "/two"
+  }, {
+    name: "Three",
+    link: "/three",
+    drop: [{
+        name: "Four",
+        link: "/four"
+      }, {
+        name: "Five",
+        link: "/five"
+      }
+    ]
+  }
+]
+
+
 export const modules_1 = [
   {
     id: "1",
@@ -27,28 +48,24 @@ export const modules_1 = [
     status: "show"
   }]
 
-export const pages = [
-  {
-    id: '1',
-    path: '/page-1',
-    name: 'name1',
-    modules: [modules_1]
-  }, {
-    id: '2',
-    path: '/page-2',
-    name: 'name2',
-    modules: []
-  }, {
-    id: '3',
-    path: '/page-3',
-    name: 'name3',
-    modules: []
-  }
-]
+export const pages = [{
+  id: '1',
+  path: '/page-1',
+  name: 'Home',
+  modules: [modules_1],
+  visible: true
+}, {
+  id: '2',
+  path: '/page-2',
+  name: 'Settings',
+  modules: [],
+  visible: true
+}]
 
 export const users = [{
     name: "admin",
-    pass: "admin"
+    pass: "admin",
+    image: "/avatar1.png"
   }, {
     name: "user",
     pass: "user"

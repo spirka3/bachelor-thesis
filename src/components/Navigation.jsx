@@ -1,27 +1,44 @@
 import React from 'react'
-import {Navbar, Nav, NavLink} from 'react-bootstrap'
+import {Navbar, Nav, NavLink, NavDropdown} from 'react-bootstrap'
 import {UserIcon} from './UserIcon'
 import {SearchBar} from './SearchBar'
+import {nav_routes} from '../data'
 
 const Navigation = ({location}) => {
 
+  sessionStorage.setItem('user', JSON.stringify({name: "admin", pass: "admin", image: "/avatar1.png"}))
   const user = sessionStorage.getItem('user')
+
+  const DropDown = ({nav}) => {
+    return (
+      <NavDropdown title={nav.name} id="basic-nav-dropdown">
+        {nav.drop.map(n =>
+          <NavDropdown.Item href={n.link}>{n.name}</NavDropdown.Item>
+        )}
+      </NavDropdown>
+    )
+  }
 
   const NavLinks = () => {
     return (
       <>
-        { user !== null && 
-          <NavLink href='/admin'>Administration</NavLink>
-        }
-        <UserIcon/>
+        {nav_routes.map(n =>
+          <>
+            {Object.keys(n).includes("drop") ? (
+              <DropDown nav={n}/>
+            ) : (
+              <NavLink href={n.link}>{n.name}</NavLink>
+            )}
+          </>
+        )}
       </>
     )
   }
 
   return (
     <>
-      <Navbar expand="sm" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
+      <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+        <Navbar.Brand href="/">
           <img
             alt="logo"
             src="https://picsum.photos/200"
@@ -30,10 +47,14 @@ const Navigation = ({location}) => {
             className="d-inline-block align-top"
           />
         </Navbar.Brand>
-        <Nav className="ml-auto" navbar activeKey={location.pathname}>
-          <SearchBar/>
-          <NavLinks/>
-        </Nav>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto" navbar activeKey={location.pathname}>
+            <NavLinks/>
+            <SearchBar/>
+            <UserIcon/>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     </>
   )

@@ -23,7 +23,7 @@ const LoginForm = ({setUser, onSubmit, loginError}) => {
         />
       </Form.Group>
 
-      {/* NAME */}
+      {/* PASS */}
       <Form.Group className="form-group">
         <Form.Label>Password</Form.Label>
         <Form.Control

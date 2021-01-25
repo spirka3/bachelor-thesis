@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
 
-  var style = {
+  const style = {
     backgroundColor: "#F8F8F8",
     borderTop: "1px solid #E7E7E7",
     textAlign: "center",
     padding: "2px",
-    position: "absolute",
     bottom: "0",
+    left: "0",
     height: "30px",
 };
 

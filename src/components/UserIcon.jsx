@@ -5,6 +5,8 @@ import UserModal from "./modals/UserModal";
 export const UserIcon = () => {
 
   const [showModal, setShowModal] = useState(false)
+  const user = sessionStorage.getItem('user');
+  const userImage = user !== null ? "/avatar1.png" : "/login.png";
 
   const handleClick = () => {
     setShowModal(true);
@@ -12,11 +14,12 @@ export const UserIcon = () => {
 
   return (
     <div>
-      <Image src="./avatar1.png" rounded onClick={handleClick} style={{width:"30px", height:"30px", margin: "6px"}}/>            
+      <Image src={userImage} rounded onClick={handleClick} className={"p-1"}  style={{width:"40px", height:"40px"}}/>
       { showModal &&
         <UserModal
           showModal={showModal}
           setShowModal={setShowModal}
+          userImage={userImage}
         />
       }
     </div>
