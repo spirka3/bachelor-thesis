@@ -3,16 +3,17 @@ import {Redirect} from "react-router";
 import {getUser} from "../../functions";
 import RegisterForm from "../forms/RegisterFrom";
 
-const Register = () => {
+const RegisterPage = () => {
 
   return (
     <>
-      {getUser() === undefined
+      {getUser() === null
         ? <RegisterForm/>
+        // FIXME don't redirect right after click on login btn
         : <Redirect to="/"/>
       }
     </>
   )
 };
 
-export default Register
+export default RegisterPage

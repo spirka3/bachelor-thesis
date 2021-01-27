@@ -1,13 +1,28 @@
-import React from "react"
+import React, {useState} from "react"
 import {useForm} from "react-hook-form"
 import {Form, Button} from "react-bootstrap"
 import {setUser} from "../../functions";
+import TextGroupForm from "./TextGroupForm";
+import {ErrorMessage} from "../others/ErrorMessage";
+import {users} from "../../data";
 
 const RegisterForm = () => {
 
   const {register, handleSubmit} = useForm()
+  const [registerError, setRegisterError] = useState("");
 
   const onSubmit = (data) => {
+    const user = users.find(u => u.name === data.name);
+    if (user !== undefined) {
+      setRegisterError("Name already exists");
+    }
+    else if (data.password !== data.confirm_password){
+      setRegisterError("Passwords doesn't match");
+    }
+    else {
+      setUser(user);
+    }
+    // TODO saveIntoDB
     setUser({name: data.name, pass: data.password})
   }
 
@@ -15,26 +30,27 @@ const RegisterForm = () => {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <h3 align="center">Register</h3>
       {/* NAME */}
-      <Form.Group className="form-group">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          name="name"
-          placeholder="Enter login name"
-          ref={register}
-          required
-        />
-      </Form.Group>
+      <TextGroupForm
+        label="name"
+        name="name"
+        register={register}
+        required
+      />
       {/* PASS */}
-      <Form.Group className="form-group">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          name="password"
-          type="password"
-          placeholder="Enter login password"
-          ref={register}
-          required
-        />
-      </Form.Group>
+      <TextGroupForm
+        label="password"
+        name="password"
+        register={register}
+        required
+      />
+      {/* CONFIRM-PASS */}
+      <TextGroupForm
+        label="password"
+        name="confirm_password"
+        register={register}
+        required
+      />
+      {registerError && <ErrorMessage text={registerError}/>}
       <Button type="submit" variant="dark" className="btn-block">Register</Button>
     </Form>
   )

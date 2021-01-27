@@ -1,7 +1,7 @@
 import React from "react"
 import {Switch, Route, Redirect} from "react-router-dom"
 import './App.css'
-import Page from './components/pages/Page.jsx'
+import CustomPage from './components/pages/CustomPage.jsx'
 
 import LoginPage from "./components/pages/LoginPage.jsx"
 import LogoutPage from "./components/pages/LogoutPage.jsx"
@@ -11,7 +11,8 @@ import ProfileForm from "./components/pages/ProfilePage";
 
 import {pages} from './data.js'
 import {getUser} from "./functions";
-import ExampleLayout from "./ExampleLayout";
+import ExampleLayout from "./components/ExampleLayout";
+import RegisterPage from "./components/pages/RegisterPage";
 
 function Routes() {
 
@@ -21,14 +22,21 @@ function Routes() {
     <Route {...rest} render={props => (getUser() !== null
         ? <Component {...props} />
         : <Redirect to="/login" />
-    )}
+      )}
     />
   )
 
+  // const LogoutRoute = ({ component: Component, ...rest }) => (
+  //   <Route {...rest} render={props => (getUser() === null
+  //       && <Component {...props} />
+  //     )}
+  //   />
+  // )
+
   const createRoute = ({path, id}) => {
-    return ( 
-      <Route path={path}>
-        <Page id={id}/>
+    return (
+      <Route exact path={path}>
+        <CustomPage id={id}/>
       </Route>
     )
   } 
@@ -37,11 +45,11 @@ function Routes() {
     <Switch>
       {/* basics routes */}
       <Route path='/' exact component={ExampleLayout} />
-      <Route path='/register' exact component={RegisterForm} />
-      <Route path='/login' exact component={LoginPage} />
-      <PrivateRoute path='/logout' exact component={LogoutPage} />
-      <PrivateRoute path='/profile-settings' exact component={ProfileForm} />
-      <PrivateRoute path='/admin' exact component={AdminPage} />
+      <Route exact path='/register' component={RegisterPage} />
+      <Route exact path='/login' component={LoginPage} />
+      <PrivateRoute exact path='/logout' component={LogoutPage} />
+      <PrivateRoute exact path='/profile-settings' component={ProfileForm} />
+      <PrivateRoute exact path='/admin' component={AdminPage} />
       {/* custom routes */}
       {pages.map(createRoute)}
     </Switch>

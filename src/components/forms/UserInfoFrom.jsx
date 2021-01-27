@@ -2,32 +2,31 @@ import React from "react";
 import {useForm} from "react-hook-form";
 import {Form, Button} from "react-bootstrap";
 import {setUser} from "../../functions";
+import TextGroupForm from "./TextGroupForm";
 
 const UserInfoForm = () => {
 
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit} = useForm()
 
   const saveEmail = (data) => {
+    // TODO saveIntoDB
     setUser({name: data.name, pass: data.pass})
   }
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(saveEmail)}>
       {/* NAME */}
-      <Form.Group className="form-group">
-        <Form.Label>Change name:</Form.Label>
-        <Form.Control
-          name="name"
-          placeholder="Enter new name"
-          ref={register}
-          required
-        />
-      </Form.Group>
-      <Button type="submit" variant="dark" className="btn-block" onClick={handleSubmit(saveEmail)}>
+      <TextGroupForm
+        label="new name"
+        name="name"
+        register={register}
+        required={true}
+      />
+      <Button type="submit" variant="dark" className="btn-block">
         Save name
       </Button>
     </Form>
   )
 }
 
-export default UserInfoForm;
+export default UserInfoForm

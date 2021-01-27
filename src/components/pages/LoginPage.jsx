@@ -15,8 +15,9 @@ const LoginPage = () => {
 
   return (
     <>
-      {getUser() === undefined
+      {getUser() === null
         ? <LoginForm findMatch={findMatch}/>
+        // FIXME don't redirect right after click on login btn
         : <Redirect to="/"/>
       }
     </>

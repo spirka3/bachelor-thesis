@@ -1,15 +1,16 @@
 import React from 'react'
+import {Card as C} from 'react-bootstrap'
 
 const Card = ({id, title, text, img}) => {
-    return (
-        <Card style={{ width: '18rem' }} key={id}>
-            <Card.Body>
-            <Card.Title>{title}</Card.Title>
-            <Card.Text>{text}</Card.Text>
-            <Card.Img src={img}/>
-            </Card.Body>
-        </Card>
-    )
+  return (
+    <C style={{ width: '18rem' }} key={id}>
+      <C.Body>
+        <C.Title>{title}</C.Title>
+        <C.Text>{text}</C.Text>
+        <C.Img src={img}/>
+      </C.Body>
+    </C>
+  )
 }
 
 export default Card

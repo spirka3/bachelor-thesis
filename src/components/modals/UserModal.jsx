@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, ButtonGroup, Modal} from "react-bootstrap";
 import {Image, Form} from 'react-bootstrap';
+import UserAvatar from "../others/UserAvatar";
 
 const UserModal = ({showModal, setShowModal, userImage}) => {
 
@@ -13,11 +14,17 @@ const UserModal = ({showModal, setShowModal, userImage}) => {
 
   const Avatar = () => {
     return (
+      // <UserAvatar
+      //   src={userImage}
+      //   onClick={handleClick}
+      //   style={{width:"60px", height:"60px", margin: "6px"}}
+      // />
       <Image src={userImage} rounded onClick={handleClick} style={{width:"60px", height:"60px", margin: "6px"}}/>
     )
   }
 
-  const [swt, setSwt] = React.useState(true);
+  const [swt, setSwt] = useState(true);
+
   const Toggle = () => {
     return (
       <Form.Check custom type="switch">
@@ -74,11 +81,10 @@ const UserModal = ({showModal, setShowModal, userImage}) => {
 
   return (
     <Modal show={showModal} onHide={closeModal} animation={false} style={style}>
-      { user !== null ? (
-        <LoginUser/>
-      ) : (
-        <LogoutUser/>
-      )}
+      { user !== null
+        ? <LoginUser/>
+        : <LogoutUser/>
+      }
     </Modal>
   )
 }

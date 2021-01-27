@@ -2,40 +2,35 @@ import React from "react";
 import {useForm} from "react-hook-form";
 import {Form, Button} from "react-bootstrap";
 import {setUser} from "../../functions";
+import TextGroupForm from "./TextGroupForm";
 
 const UserPassForm = () => {
 
   const {register, handleSubmit} = useForm();
 
   const savePass = (data) => {
-    setUser({name: data.name, pass: data.pass})
+    // TODO saveIntoDB
+    setUser({name: data.name, pass: data.password})
   }
 
   return (
     <Form>
-      {/* PASS */}
-      <Form.Group className="form-group">
-        <Form.Label>Change pass:</Form.Label>
-        <Form.Control
-          name="password"
-          typr="password"
-          placeholder="Enter new password"
-          ref={register}
-          required
-        />
-      </Form.Group>
+      {/* NEW PASS */}
+      <TextGroupForm
+        label="new password"
+        name="password"
+        type="password"
+        register={register}
+        required={true}
+      />
       {/* CONFIRM-PASS */}
-      <Form.Group className="form-group">
-        <Form.Label>Confirm pass:</Form.Label>
-        <Form.Control
-          name="password"
-          typr="password"
-          placeholder="Confirm the password"
-          ref={register}
-          required
-        />
-      </Form.Group>
-
+      <TextGroupForm
+        label="new password"
+        name="password"
+        type="password"
+        register={register}
+        required={true}
+      />
       <Button type="submit" variant="dark" className="btn-block" onClick={handleSubmit(savePass)}>
         Save pass
       </Button>

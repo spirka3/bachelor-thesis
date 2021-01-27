@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import Image from 'react-bootstrap/Image';
-import UserModal from "./modals/UserModal";
-import {getUser} from "../functions";
+import UserModal from "../modals/UserModal";
+import {getUser} from "../../functions";
 
 export const UserIcon = () => {
 
   const [showModal, setShowModal] = useState(false)
-  const userImage = getUser !== null ? "/avatar1.png" : "/login.png";
+  const userImage = getUser() !== null ? "/avatar1.png" : "/login.png";
 
   const handleClick = () => setShowModal(true);
 

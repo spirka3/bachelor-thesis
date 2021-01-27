@@ -1,18 +1,25 @@
 import React from 'react'
 import {Navbar, Nav, NavLink, NavDropdown} from 'react-bootstrap'
-import {UserIcon} from './UserIcon'
+import {UserIcon} from './others/UserIcon'
 import {SearchBar} from './SearchBar'
 import {nav_routes} from '../data'
+import Image from "react-bootstrap/Image";
 
 const Navigation = ({location}) => {
 
+  const DropDown = ({nav}) => {
+    return (
+      <NavDropdown title={nav.name} id="basic-nav-dropdown">
+        {nav.drop.map(createDropDownLink)}
+      </NavDropdown>
+    )
+  }
+
   const createLink = (n) => {
     return (
-      <>
-        {Object.keys(n).includes("drop")
-          ? <DropDown/>
-          : <NavLink href={n.link}>{n.name}</NavLink>
-        }
+      <> {Object.keys(n).includes("drop")
+          ? <DropDown nav={n}/>
+          : <NavLink href={n.link}>{n.name}</NavLink>}
       </>
     )
   }
@@ -23,24 +30,10 @@ const Navigation = ({location}) => {
     )
   }
 
-  const DropDown = ({nav}) => {
-    return (
-      <NavDropdown title={nav.name} id="basic-nav-dropdown">
-        {nav.drop.map(createDropDownLink)}
-      </NavDropdown>
-    )
-  }
-
   const NavBrand = () => {
     return (
       <Navbar.Brand href="/">
-        <img
-          alt="logo"
-          src="https://picsum.photos/200"
-          width="40"
-          height="40"
-          className="d-inline-block align-top"
-        />
+        <Image alt="logo" src="/avatar2.png" width="40" height="40"/>
       </Navbar.Brand>
     )
   }

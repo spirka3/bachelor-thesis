@@ -6,9 +6,12 @@ import './App.css'
 import Navigation from "./components/Navigation.jsx"
 import Footer from "./components/Footer.jsx"
 import Routes from "./Routes";
+import {defUser} from "./functions";
 
 function App() {
-  // sessionStorage.setItem('user', JSON.stringify({name: "admin", pass: "admin", image: "/avatar1.png"}))
+
+  // defUser()
+
   const NavWithRouter = withRouter(Navigation); // get page with location
 
   return (
